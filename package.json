@@ -1,8 +1,8 @@
 {
   "name": "youtube-music",
-  "productName": "youtube-music",
+  "productName": "YouTube Music",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Desktop window for browsing YouTube Music",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
