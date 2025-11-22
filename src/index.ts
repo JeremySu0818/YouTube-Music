@@ -45,6 +45,15 @@ const createWindow = (): void => {
       },
     },
   }));
+
+  // Reload page when user presses Ctrl/Cmd+R, mirroring browser behavior.
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    const key = input.key?.toLowerCase();
+    if (input.type === 'keyDown' && key === 'r' && (input.control || input.meta)) {
+      event.preventDefault();
+      mainWindow.webContents.reload();
+    }
+  });
 };
 
 // This method will be called when Electron has finished
