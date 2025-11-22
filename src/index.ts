@@ -39,11 +39,22 @@ const createWindow = (): void => {
     },
   }));
 
+  // Always allow reload/close without being blocked by beforeunload dialogs inside the page.
+  mainWindow.webContents.on('will-prevent-unload', (event) => {
+    event.preventDefault();
+  });
+
   mainWindow.webContents.on('before-input-event', (event, input) => {
     const key = input.key?.toLowerCase();
-    if (input.type === 'keyDown' && key === 'r' && (input.control || input.meta)) {
-      event.preventDefault();
-      mainWindow.webContents.reload();
+    if (input.type === 'keyDown') {
+      if (key === 'r' && (input.control || input.meta)) {
+        event.preventDefault();
+        mainWindow.webContents.reload();
+      }
+      if (key === 'f11' || (key === 'f' && input.meta && input.control)) {
+        event.preventDefault();
+        mainWindow.setFullScreen(!mainWindow.isFullScreen());
+      }
     }
   });
 };
