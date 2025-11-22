@@ -1,7 +1,6 @@
 import path from 'path';
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { MakerZIP } from '@electron-forge/maker-zip';
-import { MakerSquirrel } from '@electron-forge/maker-squirrel';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
@@ -10,23 +9,14 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 import { mainConfig } from './webpack.main.config';
 import { rendererConfig } from './webpack.renderer.config';
 
-const tempOutDir = path.resolve(process.env.TEMP ?? 'C:\\Temp', 'youtube-music-forge');
-
 const config: ForgeConfig = {
-  outDir: tempOutDir,
   packagerConfig: {
     asar: true,
     icon: path.join(__dirname, 'assets', 'icon'),
     extraResource: [path.join(__dirname, 'assets')],
   },
   rebuildConfig: {},
-  makers: [
-    new MakerSquirrel({
-      name: 'youtube-music',
-      authors: 'YouTube Music Dev',
-    }),
-    new MakerZIP({}),
-  ],
+  makers: [new MakerZIP({})],
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
