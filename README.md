@@ -12,7 +12,7 @@
 ## 從原始碼建置
 ```bash
 git clone https://github.com/JeremySu0818/YouTube-Music
-cd YouTube-Music
+cd YouTube Music
 npm install   # 開發相依套件
 npm run make  # 編譯可執行檔案
 ```
